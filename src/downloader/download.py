@@ -375,27 +375,9 @@ class Downloader:
             suffix: str = "mp4",
             type_: str = _("视频"),
     ) -> None:
-        if not item["downloads"]:
-            self.log.error(_("【{type}】{name} 提取文件下载地址失败，跳过下载").format(type=type_, name=name))
-            return
-        if await self.is_skip(
-                id_,
-                p := actual_root.with_name(
-                    f"{name}.{suffix}",
-                ),
-        ):
-            self.log.info(_("【{type}】{name} 存在下载记录或文件已存在，跳过下载").format(type=type_, name=name))
-            self.log.info(f"文件路径: {p.resolve()}", False)
-            count.skipped_video.add(id_)
-            return
-        tasks.append((
-            item["downloads"],
-            temp_root.with_name(f"{name}.{suffix}"),
-            p,
-            f"【{type_}】{name}",
-            id_,
-            suffix,
-        ))
+       self.log.info(_("[{type}] {name} 视频下载已被跳过").format(type=type_,name=name))
+        count.skipped_video.add(id_)
+        return
 
     def download_music(
             self,
