@@ -376,8 +376,8 @@ class Downloader:
             type_: str = _("视频"),
     ) -> None:
        self.log.info(_("[{type}] {name} 视频下载已被跳过").format(type=type_,name=name))
-        count.skipped_video.add(id_)
-        return
+       count.skipped_video.add(id_)
+       return
 
     def download_music(
             self,
